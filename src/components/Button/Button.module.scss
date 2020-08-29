@@ -1,0 +1,14 @@
+.button {
+  margin: 1rem 0;
+  padding: 1rem 5rem;
+  font-size: 1.1rem;
+  color: var(--white);
+  background: var(--primary);
+  border: none;
+  outline-color: var(--primary);
+  border-radius: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
