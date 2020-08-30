@@ -3,12 +3,18 @@ import { Title } from "components/Title";
 import { ReactComponent as UnlockLogo } from "assets/unlock.svg";
 import { Button } from "components/Button";
 import styled from "styled-components";
+import { firebase } from "firebaseSetup/config";
+import { useHistory } from "react-router-dom";
 
 export const SignIn = () => {
   const [signInText, setSignInText] = useState("Sign In");
   const [questionText, setQuestionText] = useState("Don't have an account?");
   const [switchUserTypeText, setSwitchUserTypeText] = useState("Create One");
   const [isNewUser, setIsNewUser] = useState(false);
+  const [emailText, setEmailText] = useState("");
+  const [passwordText, setPasswordText] = useState("");
+
+  const history = useHistory();
 
   useEffect(() => {
     if (isNewUser) {
@@ -26,24 +32,46 @@ export const SignIn = () => {
     setIsNewUser((prevState) => !prevState);
   };
 
-  const handleSignInButtonClick = () => {
-    console.log("hello there");
+  const handleFormSubmission = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isNewUser) {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(emailText, passwordText);
+    } else {
+      await firebase.auth().signInWithEmailAndPassword(emailText, passwordText);
+    }
+
+    history.push("/app");
   };
 
   return (
     <Container>
       <Title>Simplist</Title>
       <Logo />
-      <Form>
+      <Form onSubmit={(e) => handleFormSubmission(e)}>
         <FormSection>
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" required />
+          <input
+            id="email"
+            type="email"
+            value={emailText}
+            onChange={(e) => setEmailText(e.target.value)}
+            required
+          />
         </FormSection>
         <FormSection>
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" required />
+          <input
+            id="password"
+            type="password"
+            value={passwordText}
+            onChange={(e) => setPasswordText(e.target.value)}
+            required
+          />
         </FormSection>
-        <Button onClick={handleSignInButtonClick}>{signInText}</Button>
+        <Button>{signInText}</Button>
         <AccountQuestion>{questionText}</AccountQuestion>
         <AccountQuestionButton onClick={toggleIsNewUser} type="button">
           {switchUserTypeText}
