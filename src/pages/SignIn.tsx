@@ -7,10 +7,10 @@ import { firebase } from "firebaseSetup/config";
 import { useHistory } from "react-router-dom";
 
 export const SignIn = () => {
-  const [signInText, setSignInText] = useState("Sign In");
-  const [questionText, setQuestionText] = useState("Don't have an account?");
-  const [switchUserTypeText, setSwitchUserTypeText] = useState("Create One");
-  const [isNewUser, setIsNewUser] = useState(false);
+  const [signInText, setSignInText] = useState("Create Account");
+  const [questionText, setQuestionText] = useState("Already have an account?");
+  const [switchUserTypeText, setSwitchUserTypeText] = useState("Sign In");
+  const [isNewUser, setIsNewUser] = useState(true);
   const [emailText, setEmailText] = useState("");
   const [passwordText, setPasswordText] = useState("");
 
@@ -106,7 +106,7 @@ const AccountQuestionButton = styled.button`
 `;
 
 const Container = styled.div`
-  padding: 0 4rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,6 +134,8 @@ const FormSection = styled.section`
   input[type="text"],
   input[type="email"],
   input[type="password"] {
+    font-size: 1rem;
+    padding: 1rem 0.5rem;
     box-sizing: border-box;
     width: 100%;
     height: 3rem;

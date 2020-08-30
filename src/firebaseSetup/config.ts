@@ -26,4 +26,4 @@ if (location.hostname === "localhost") {
   });
 }
 
-export { firebase };
+export { firebase, db };

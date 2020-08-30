@@ -5,6 +5,7 @@ import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "./Routes";
+import { AuthProvider } from "components/AuthProvider";
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -41,10 +42,12 @@ Sentry.init({
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <AuthProvider>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
