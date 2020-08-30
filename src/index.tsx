@@ -1,10 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createGlobalStyle } from "styled-components";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import "./index.scss";
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "./Routes";
+
+const GlobalStyle = createGlobalStyle`
+  :root {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+
+  /* custom properties/variables */
+  --primary: #ff6b00;
+  --grey1: #e0e0e0;
+  --grey2: #d3d3d3;
+  --white: #f2f2f2;
+}
+
+html {
+  background: #5e5e5e;
+}
+
+body {
+  margin: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+`;
 
 Sentry.init({
   dsn:
@@ -15,6 +41,7 @@ Sentry.init({
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle />
     <BrowserRouter>
       <Routes />
     </BrowserRouter>

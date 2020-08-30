@@ -1,4 +1,6 @@
-.button {
+import styled from "styled-components";
+
+export const Button = styled.button`
   margin: 1rem 0;
   padding: 1rem 5rem;
   font-size: 1.1rem;
@@ -11,4 +13,4 @@
   &:hover {
     cursor: pointer;
   }
-}
+`;

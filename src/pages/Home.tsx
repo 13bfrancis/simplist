@@ -1,15 +1,15 @@
 import React from "react";
-import styles from "./Home.module.scss";
-import { Title } from "../../components/Title/Title";
-import { Subtitle } from "../../components/Subtitle/Subtitle";
-import { Button } from "../../components/Button/Button";
-import { ReactComponent as ChecksLogo } from "../../assets/checks.svg";
+import { Title } from "components/Title";
+import { Subtitle } from "components/Subtitle";
+import { Button } from "components/Button";
+import { ReactComponent as ChecksLogo } from "assets/checks.svg";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 export const Home = () => {
   const history = useHistory();
   return (
-    <div className={styles.container}>
+    <Container>
       <Title style={{ marginBottom: ".25rem" }}>Simplist</Title>
       <Subtitle>Turn your life into a checklist</Subtitle>
       <ChecksLogo style={{ margin: "3rem 0" }} />
@@ -21,6 +21,12 @@ export const Home = () => {
       >
         Get Started
       </Button>
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

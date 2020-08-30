@@ -25,8 +25,8 @@ yarn-error.log*
 
 #firebase
 firestore-debug.log
-firestore.indexes.json
+firebase-debug.log
 ui-debug.log
+firestore.indexes.json
 /.firebase
 .firebaserc
-
