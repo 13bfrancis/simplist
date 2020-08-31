@@ -43,7 +43,7 @@ export const App = () => {
   }, [currentUser]);
 
   const handleDeleteItem = async (id: string) => {
-    await db.collection("todo").doc(id).delete();
+    await db.collection("todos").doc(id).delete();
   };
 
   const handleSignOutClick = async () => {
