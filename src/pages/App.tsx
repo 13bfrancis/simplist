@@ -9,7 +9,7 @@ import { AuthContext } from "context/AuthContext";
 
 interface Todo {
   id: string;
-  uid: string;
+  userId: string;
   item: string;
 }
 
@@ -23,8 +23,8 @@ export const App = () => {
     if (!currentUser) return;
 
     const cleanup = db
-      .collection("todo")
-      .where("uid", "==", currentUser.uid)
+      .collection("todos")
+      .where("userId", "==", currentUser.uid)
       .onSnapshot((querySnap) => {
         const todoList: Todo[] = [];
 
@@ -32,7 +32,7 @@ export const App = () => {
           todoList.push({
             id: doc.id,
             item: doc.data().todo,
-            uid: currentUser?.uid,
+            userId: currentUser?.uid,
           } as Todo);
         });
 
@@ -52,8 +52,8 @@ export const App = () => {
 
   const handleAddButtonClick = async () => {
     await db
-      .collection("todo")
-      .add({ todo: newTodoText, uid: firebase.auth().currentUser?.uid });
+      .collection("todos")
+      .add({ todo: newTodoText, userId: firebase.auth().currentUser?.uid });
 
     setNewTodoText("");
   };
